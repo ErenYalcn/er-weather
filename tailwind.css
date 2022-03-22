@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+@layer base{
+    html, body{
+        font-family: 'Roboto', sans-serif;
+        @apply antialiased;
+        
+
+    }
+}
+
+input {
+    caret-color: #6366f1;
+}
