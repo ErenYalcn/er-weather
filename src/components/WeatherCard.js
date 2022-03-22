@@ -1,34 +1,59 @@
 import React from 'react'
-import Search from './Search'
 import { TiWeatherPartlySunny } from 'react-icons/ti';
 import { GiWindSlap } from 'react-icons/gi';
 import { WiHumidity } from 'react-icons/wi';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+
+import { RiSearch2Line } from 'react-icons/ri';
+import { Icon } from 'Icons';
 
 
-export default function WeatherCard({isDarkMode, setIsDarkMode}) {
+
+export default function WeatherCard({isDarkMode, setIsDarkMode, state, setGetState, inputHandler, submitHandler, getState, apiData, kelvinToFarenheit, fixedSpeed, isTurn}) {
+
+
+  var d = new Date();
+  var gunler= ["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
+
+  
+
+
+console.log(isTurn)
+
   return (
     <div className='w-[80%] sm:w-[60%] lg:w-[40%] m-auto h-auto shadow-lg rounded-lg flex flex-col p-6 mt-2 sm:mt-8'>
-      <Search isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+          <div className='flex items-center gap-x-4 p-4 border-b-2 mb-6'>
+        <RiSearch2Line size={24} color="#6366f1" />
+        <input id="arama" onChange={inputHandler} value={getState} className={isDarkMode ? 'text-white bg-ddark outline-none text-[16px] w-full sm:w-[20rem] placeholder-white placeholder-opacity-80' : 'text-black outline-none text-[16px] w-full sm:w-[20rem] placeholder-black placeholder-opacity-80'} placeholder='Lokasyona göre arama yap'></input>
+        <div className='animate-spin'>{isTurn ? (<AiOutlineLoading3Quarters color={isDarkMode ? "white":"#6366f1"} />): null}</div>
+
+    </div>
+    {apiData.main ? (
       <div>
         <div>
-          <h2 className={isDarkMode ? 'text-2xl font-bold text-white' : 'text-2xl font-bold'}>Ankara, TR</h2>
-          <p className='text-sm text-lightgray text-opacity-70'>Çarşamba, 4:42 dağınık bulutlu.</p>
+          <h2 className={isDarkMode ? 'text-2xl font-bold text-white' : 'text-2xl font-bold'}>{apiData.name}, {apiData.sys.country}</h2>
+          <p className='text-sm text-lightgray text-opacity-70'>{gunler[d.getDay()]}, {apiData.name}  {apiData.weather[0].description}.</p>
         </div>
         <div className='flex justify-between mx-4'>
           <div className='mt-12 mb-8'>
-            <span className='text-[76px] text-lightgray'>10°</span>
-            <p className='text-sm text-lightgray'>hissedilen sıcaklık 6°</p>
+            <span className='text-[76px] text-lightgray'>{kelvinToFarenheit(apiData.main.temp)}&deg;</span>
+            <p className='text-sm text-lightgray'>hissedilen sıcaklık {kelvinToFarenheit(apiData.main.feels_like)}&deg;</p>
           </div>
           <div className='mt-12 mb-8'>
             <TiWeatherPartlySunny size={112} color="#6366f1" />
           </div>
         </div>
         <div className='flex gap-x-4 ml-[1rem]'>
-          <span className='flex items-center gap-x-2 text-lightgray'><GiWindSlap size={18} color="#6366f1"/> 18m/s rüzgarlı</span>
-          <span className='flex items-center gap-x-2 text-lightgray'><WiHumidity size={28} color="#6366f1"/> 31% nemli</span>
+          <span className='flex items-center gap-x-2 text-lightgray'><GiWindSlap size={18} color="#6366f1"/> {fixedSpeed(apiData.wind.speed)} m/s rüzgarlı</span>
+          <span className='flex items-center gap-x-2 text-lightgray'><WiHumidity size={28} color="#6366f1"/> {apiData.main.humidity}% nemli</span>
         </div>
 
-      </div>
+      </div>) : (
+      <div className='flex flex-col'>
+        <Icon name="noresult" />
+        <p className='text-2xl w-full mx-auto text-center text-lightgray'>Üzgünüz, aradığınız bölgeyi bulamadık.</p>
+      </div>)}
+      {apiData.main ? (
       <div className='mx-auto'>
           <p className='text-2xl text-lightgray my-4 border-b-2 pb-2'>Dışarısı bulutlu ve fırtınalı, ceket giymelisin</p>
 
@@ -76,7 +101,7 @@ export default function WeatherCard({isDarkMode, setIsDarkMode}) {
           </ul>
 
 
-      </div>
+      </div>) : null}
     </div>
   )
 }
