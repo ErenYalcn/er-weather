@@ -21,6 +21,8 @@ function App() {
       .then((data) => setApiData(data));
   }, [apiUrl]);
 
+
+
   const [isTurn, setIsTurn] = useState(false);
 
 
@@ -33,7 +35,7 @@ function App() {
     }else {
     }
     if(document.querySelector('#arama').value.length > 0){
-      console.log('1den büyük')
+      
       setIsTurn(true);
       
     }else {}
@@ -58,15 +60,13 @@ function App() {
     return s.toFixed(0);
   };
 
-  console.log(getState) 
-
   const [isDarkMode, setIsDarkMode] = useState(() => false);
   return (
     <div className={isDarkMode ? "App bg-ddark" : "App bg-white"}>
         <div className="w-full h-6 bg-gradient-to-r from-sky-500 to-indigo-500"></div>
         <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
         <WeatherCard isTurn={isTurn} fixedSpeed={fixedSpeed} kelvinToFarenheit={kelvinToFarenheit} apiData={apiData} setApiData={setApiData} isDarkMode={isDarkMode}  state={state} setGetState={setGetState} inputHandler={inputHandler} getState={getState} submitHandler={submitHandler}/>
-
+        
         
         <Footer isDarkMode={isDarkMode} />
     </div>

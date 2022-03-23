@@ -476,10 +476,6 @@ html, body{
   margin: auto;
 }
 
-.m-5 {
-  margin: 1.25rem;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -522,10 +518,6 @@ html, body{
 
 .ml-\[1rem\] {
   margin-left: 1rem;
-}
-
-.block {
-  display: block;
 }
 
 .flex {
@@ -578,11 +570,6 @@ html, body{
 .animate-spin {
   -webkit-animation: spin 1s linear infinite;
           animation: spin 1s linear infinite;
-}
-
-.animate-none {
-  -webkit-animation: none;
-          animation: none;
 }
 
 .flex-row {
@@ -681,10 +668,6 @@ html, body{
   --tw-gradient-to: #ec4899;
 }
 
-.object-center {
-  object-position: center;
-}
-
 .p-\[6px\] {
   padding: 6px;
 }
@@ -744,16 +727,6 @@ html, body{
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
-}
-
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
-}
-
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
 }
 
 .font-bold {
